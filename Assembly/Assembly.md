@@ -62,6 +62,7 @@ We can try with other flags (**Optional if you have time**)
 - `--cov-cutoff 20` minimum cut-off of deep of coverage. 
 
 ## Check the quality of your assembly
+
 `quast {input.assembly}`
 
 
