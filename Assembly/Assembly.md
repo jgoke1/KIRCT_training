@@ -1,33 +1,7 @@
 # ASSEMBLY
-## Installation of tools and environment creation
-**Download** the **sr_assembly.yml** file. 
 
-**create** a directory for the assembly `mkdir sr_assembly` 
-
-move the **sr_assembly.yml** to the new directory you created `mv sr_assembly.yml sr_assembly/`
-
-check if **mamba** is installed `which mamba`, if not present use `conda install -n base -c conda-forge mamba`
-
-Now **create** a sr_assembly environment, `mamba env create -f sr_assembly.yml`
-
-**Activate** the new environment `conda activate sr_assembly`
-
-`mamba install conda-forge::pip` to install pip
-`mamba install conda-forge::python` to install python
-
-Install **Bactinspector**, `pip install bactinspector`
-
-- ### Alternatively
-you can also go through this  installing every software to be used singly:
-
-- check if **mamba** is installed `which mamba`, if not present use `conda install -n base -c conda-forge mamba`
-
-- Now **create** a sr_assembly environment, `mamba env create -f sr_assembly`
-
-**Activate** the new environment `conda activate sr_assembly`
-
-- `mamba install bioconda::pip` to install **pip**
-- `mamba install bioconda::python` to install **python**
+- `mamba install  conda-forge::pip` to install **pip**
+- `mamba install  conda-forge::python` to install **python**
 - `mamba install bioconda::fastqc` to install **fastqc**
 - `mamba install bioconda::trimmomatic` to install **trimmomatic**
 - `mamba install bioconda::spades` to install **spades**
@@ -35,7 +9,41 @@ you can also go through this  installing every software to be used singly:
 - `mamba install bioconda::checkm-genome` to intall **checkm-genome** to check genome completeness.
 - `mamba install bioconda::mash` to intall **mash**
 - `mamba install bioconda::multiqc` to intall **multiqc**
-- Install **Bactinspector**, `pip install bactinspector`
+- Install **Bactinspector**, `pip install bactinspectorMax`
+- `pip install setuptools`
+
+## **To deal with depency issues**, we create seperate conda environment to manage this.
+- ### *SPAdes*
+- `conda create -n spades_env` to create a **spades_env** environment
+- `conda install bioconda::spades`
+
+- ### *conFindr*
+- `conda create -n conFindr_env` to create a  **conFindr_env** environment
+- `conda install bioconda::confindr`
+
+- ### *Bactinspector*
+- `conda create -n bactinspector_env` to create a **bactinspector_env** environment
+- `conda install  conda-forge::pip`
+- `pip install bactinspectorMax`
+- `pip install setuptools`
+- `conda install bioconda::mash`
+
+- ### *Quast*
+- `conda create -n quast_env` to create **quast_env** environment
+- `conda install bioconda::quast`
+
+## Trimming off bad reads
+`trimmomatic PE -phred33 input_forward.fastq.gz input_reverse.fastq.gz output_paired_forward.fq.gz output_unpaired_forward.fq.gz output_paired_reverse.fq.gz output_unpaired_reverse.fq.gz [options]`
+
+##  Check for contamination
+`confindr -i {input.read} -o output`
+
+Assess your output
+
+## Speciation
+`bactinspector check_species -i {input.read}  -fq "*.fastq.gz" -o speciation`
+
+
 
 ## Assembly 
 *De novo* assembly is a very important step and the first for downstream genomical analysis, especially for bacterial genome. 
@@ -64,5 +72,8 @@ We can try with other flags (**Optional if you have time**)
 - `-k 55,71,91,111` set of k-mer used for assembly. To reduce the time of assembly, you can reduce the number of number. K-mer must not higher the read length. 
 - `--cov-cutoff 20` minimum cut-off of deep of coverage. 
 
-### check the quality of your 
+## Check the quality of your assembly
 `quast {input.assembly}`
+
+
+

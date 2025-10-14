@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>assembly</title>
+<title>phylogeny</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,16 +23,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="Assembly_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Assembly_files/libs/quarto-html/quarto.js"></script>
-<script src="Assembly_files/libs/quarto-html/popper.min.js"></script>
-<script src="Assembly_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Assembly_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Assembly_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Assembly_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Assembly_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Assembly_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Assembly_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Phylogeny_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Phylogeny_files/libs/quarto-html/quarto.js"></script>
+<script src="Phylogeny_files/libs/quarto-html/popper.min.js"></script>
+<script src="Phylogeny_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Phylogeny_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Phylogeny_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Phylogeny_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Phylogeny_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Phylogeny_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Phylogeny_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -46,77 +46,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="assembly" class="level1">
-<h1>ASSEMBLY</h1>
-<ul>
-<li><code>mamba install  conda-forge::pip</code> to install <strong>pip</strong></li>
-<li><code>mamba install  conda-forge::python</code> to install <strong>python</strong></li>
-<li><code>mamba install bioconda::fastqc</code> to install <strong>fastqc</strong></li>
-<li><code>mamba install bioconda::trimmomatic</code> to install <strong>trimmomatic</strong></li>
-<li><code>mamba install bioconda::spades</code> to install <strong>spades</strong></li>
-<li><code>mamba install bioconda::quast</code> to intall <strong>quast</strong></li>
-<li><code>mamba install bioconda::checkm-genome</code> to intall <strong>checkm-genome</strong> to check genome completeness.</li>
-<li><code>mamba install bioconda::mash</code> to intall <strong>mash</strong></li>
-<li><code>mamba install bioconda::multiqc</code> to intall <strong>multiqc</strong></li>
-<li>Install <strong>Bactinspector</strong>, <code>pip install bactinspectorMax</code></li>
-<li><code>pip install setuptools</code></li>
-</ul>
-<section id="to-deal-with-depency-issues-we-create-seperate-conda-environment-to-manage-this." class="level2">
-<h2 class="anchored" data-anchor-id="to-deal-with-depency-issues-we-create-seperate-conda-environment-to-manage-this."><strong>To deal with depency issues</strong>, we create seperate conda environment to manage this.</h2>
-<ul>
-<li><h3 id="spades" class="anchored"><em>SPAdes</em></h3></li>
-<li><p><code>conda create -n spades_env</code> to create a <strong>spades_env</strong> environment</p></li>
-<li><p><code>conda install bioconda::spades</code></p></li>
-<li><h3 id="confindr" class="anchored"><em>conFindr</em></h3></li>
-<li><p><code>conda create -n conFindr_env</code> to create a <strong>conFindr_env</strong> environment</p></li>
-<li><p><code>conda install bioconda::confindr</code></p></li>
-<li><h3 id="bactinspector" class="anchored"><em>Bactinspector</em></h3></li>
-<li><p><code>conda create -n bactinspector_env</code> to create a <strong>bactinspector_env</strong> environment</p></li>
-<li><p><code>conda install  conda-forge::pip</code></p></li>
-<li><p><code>pip install bactinspectorMax</code></p></li>
-<li><p><code>pip install setuptools</code></p></li>
-<li><p><code>conda install bioconda::mash</code></p></li>
-<li><h3 id="quast" class="anchored"><em>Quast</em></h3></li>
-<li><p><code>conda create -n quast_env</code> to create <strong>quast_env</strong> environment</p></li>
-<li><p><code>conda install bioconda::quast</code></p></li>
-</ul>
-</section>
-<section id="trimming-off-bad-reads" class="level2">
-<h2 class="anchored" data-anchor-id="trimming-off-bad-reads">Trimming off bad reads</h2>
-<p><code>trimmomatic PE -phred33 input_forward.fastq.gz input_reverse.fastq.gz output_paired_forward.fq.gz output_unpaired_forward.fq.gz output_paired_reverse.fq.gz output_unpaired_reverse.fq.gz [options]</code></p>
-</section>
-<section id="check-for-contamination" class="level2">
-<h2 class="anchored" data-anchor-id="check-for-contamination">Check for contamination</h2>
-<p><code>confindr -i {input.read} -o output</code></p>
-<p>Assess your output</p>
-</section>
-<section id="speciation" class="level2">
-<h2 class="anchored" data-anchor-id="speciation">Speciation</h2>
-<p><code>bactinspector check_species -i {input.read}  -fq "*.fastq.gz" -o speciation</code></p>
-</section>
-<section id="assembly-1" class="level2">
-<h2 class="anchored" data-anchor-id="assembly-1">Assembly</h2>
-<p><em>De novo</em> assembly is a very important step and the first for downstream genomical analysis, especially for bacterial genome.</p>
-<p>==With different types of raw reads, we need a different assembler==.</p>
-<p><strong>!Note</strong>: you have to replace the {input} bracket with your input to be able to run the command.</p>
-</section>
-<section id="short-read-assembly" class="level2">
-<h2 class="anchored" data-anchor-id="short-read-assembly">Short read assembly</h2>
-<p>Short reads are the output from <strong>ILLUMINA</strong>, <strong>MGI</strong>, etc. with a fixed read length (around ~100-300bp) with a very large amount of reads (can up to millions). Thus, the algorithms of short reads assembly requires a lot of computational resources. Additionally, different K-mer can result different set of of contigs.</p>
-<p>We will use SPAdes as the short read assembler Firstly, we use <code>--isolate</code> mode to indicate our input is from bacteiral isolate with pair-end reads (<code>-1</code>, <code>-2</code>).</p>
-<p>We assembly the short read using this command:</p>
-<p><code>spades.py --isolate -1 {input.read1} -2 {input.read2} -o {output}</code></p>
-<p>We can try with other flags (<strong>Optional if you have time</strong>)</p>
-<p><code>spades.py --isolate -1 {input.read1} -2 {input.read2} -o {output} -t 8 -k 55,71,91,111 --cov-cutoff 20</code></p>
-<ul>
-<li><code>-t 8</code>: use 4 threads/cores to run assembly. You can change the number to increase or decrease number of threads which suits your commputer</li>
-<li><code>-k 55,71,91,111</code> set of k-mer used for assembly. To reduce the time of assembly, you can reduce the number of number. K-mer must not higher the read length.</li>
-<li><code>--cov-cutoff 20</code> minimum cut-off of deep of coverage.</li>
-</ul>
-</section>
-<section id="check-the-quality-of-your-assembly" class="level2">
-<h2 class="anchored" data-anchor-id="check-the-quality-of-your-assembly">Check the quality of your assembly</h2>
-<p><code>quast {input.assembly}</code></p>
+<section id="snp-phlogeny" class="level1">
+<h1>SNP Phlogeny</h1>
+<section id="determine-your-reference-genome" class="level2">
+<h2 class="anchored" data-anchor-id="determine-your-reference-genome">Determine your reference genome</h2>
+<p><strong>Determine your reference genome</strong></p>
 </section>
 </section>
 
