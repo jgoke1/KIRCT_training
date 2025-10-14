@@ -1,18 +1,7 @@
-# ASSEMBLY
+# ASSEMBLY TUTORIAL
 
-- `mamba install  conda-forge::pip` to install **pip**
-- `mamba install  conda-forge::python` to install **python**
-- `mamba install bioconda::fastqc` to install **fastqc**
-- `mamba install bioconda::trimmomatic` to install **trimmomatic**
-- `mamba install bioconda::spades` to install **spades**
-- `mamba install bioconda::quast` to intall **quast**
-- `mamba install bioconda::checkm-genome` to intall **checkm-genome** to check genome completeness.
-- `mamba install bioconda::mash` to intall **mash**
-- `mamba install bioconda::multiqc` to intall **multiqc**
-- Install **Bactinspector**, `pip install bactinspectorMax`
-- `pip install setuptools`
+## **To deal with dependency issues**, we'll create seperate conda environment to manage this.
 
-## **To deal with depency issues**, we create seperate conda environment to manage this.
 - ### *SPAdes*
 - `conda create -n spades_env` to create a **spades_env** environment
 - `conda install bioconda::spades`
